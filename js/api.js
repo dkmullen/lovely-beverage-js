@@ -17,8 +17,9 @@ function getMeADrink(qStr, id = '') {
 }
 
 let randomButton = document.querySelector('#random-button');
-randomButton.addEventListener('click', mixMeARandomDrink);
-console.log(randomButton);
+if (randomButton) {
+  randomButton.addEventListener('click', mixMeARandomDrink);
+}
 
 function mixMeARandomDrink(e) {
   // e.preventDefault();
@@ -62,7 +63,7 @@ function makeButtons() {
   letters.forEach((l) => {
     letterStr += `
     <div class="letter-square" onclick="check('${l}')">
-      <span class="letter">${l}</span>
+      <span class="letter" aria-label="button for ${l}">${l}</span>
     </div>
     `;
   });

@@ -1,3 +1,7 @@
+:root {
+  --primary: #24b4ac;
+  --accent: #f48484;
+}
 body {
   max-width: 1000px;
   margin: 1rem auto;
@@ -17,6 +21,7 @@ h4,
 h5,
 h6 {
   font-weight: 300;
+  margin-top: 1rem;
 }
 header {
   text-align: center;
@@ -26,9 +31,7 @@ header {
 .details-drink {
   text-align: center;
   margin: 0 auto;
-  margin-bottom: 2rem;
   height: 595px;
-  /* margin-top: 3rem; */
 }
 .featured-drink .tagline {
   margin-top: -15px;
@@ -101,10 +104,13 @@ footer #letter-bar .letter-square {
   height: 30px;
   width: 30px;
   margin: 2px;
-  border: 1px solid #24b4ac;
+  border: 1px solid var(--primary);
   border-radius: 50%;
   margin: 2px;
-  background: #24b4ac;
+  background: var(--primary);
+}
+footer #letter-bar .letter-square:hover {
+  cursor: pointer;
 }
 footer #letter-bar .letter-square .letter {
   font-weight: 300;
@@ -115,7 +121,7 @@ footer #letter-bar .letter-square .letter {
 }
 button {
   color: white;
-  background: #f48484;
+  background: var(--accent);
   height: 50px;
   border: none;
   border-radius: 10px;
@@ -127,10 +133,10 @@ button {
   margin: 1rem;
 }
 .credits {
-  margin-top: 3rem;
+  font-size: small;
 }
 .credits a {
-  color: #24b4ac;
+  color: var(--primary);
   font-weight: bold;
 }
 @media (max-width: 999px) {
