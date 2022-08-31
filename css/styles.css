@@ -1,0 +1,145 @@
+body {
+  max-width: 1000px;
+  margin: 1rem auto;
+  font-family: 'Lato', serif;
+}
+a {
+  text-decoration: none;
+}
+ul {
+  list-style: none;
+  padding: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 300;
+}
+header {
+  text-align: center;
+  height: 60px;
+}
+.featured-drink,
+.details-drink {
+  text-align: center;
+  margin: 0 auto;
+  margin-bottom: 2rem;
+  height: 595px;
+  /* margin-top: 3rem; */
+}
+.featured-drink .tagline {
+  margin-top: -15px;
+  font-size: 14px;
+  opacity: 0.5;
+}
+.featured-drink img {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+}
+
+.details-drink img {
+  width: 100%;
+  max-width: 700px;
+  height: auto;
+}
+.details-drink .instructions {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 10px;
+}
+.subtle {
+  font-size: small;
+  opacity: 0.5;
+}
+.drink-list {
+  margin: 1rem auto;
+  display: grid;
+  width: fit-content;
+  grid-template-columns: repeat(3, 33%);
+  grid-template-rows: auto;
+  grid-gap: 8px;
+}
+.drink-list a,
+.featured-drink a {
+  color: black;
+}
+.drink-list-item {
+  width: 300px;
+  border: 1px solid rgba(36, 180, 172, 0.3);
+  border-radius: 5px;
+  margin: 1rem;
+}
+.drink-list-item img {
+  max-width: 300px;
+}
+.drink-list-label {
+  padding: 10px;
+}
+.drink-list-name {
+  font-size: large;
+}
+.drink-list-ingredients {
+  font-size: small;
+  width: 280px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+footer {
+  text-align: center;
+}
+footer #letter-bar {
+  max-width: 500px;
+  margin: 0 auto;
+}
+footer #letter-bar .letter-square {
+  display: inline-block;
+  height: 30px;
+  width: 30px;
+  margin: 2px;
+  border: 1px solid #24b4ac;
+  border-radius: 50%;
+  margin: 2px;
+  background: #24b4ac;
+}
+footer #letter-bar .letter-square .letter {
+  font-weight: 300;
+  color: white;
+  font-size: larger;
+  top: 1px;
+  position: relative;
+}
+button {
+  color: white;
+  background: #f48484;
+  height: 50px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: large;
+  padding: 10px;
+}
+.button-row {
+  margin: 1rem;
+}
+.credits {
+  margin-top: 3rem;
+}
+.credits a {
+  color: #24b4ac;
+  font-weight: bold;
+}
+@media (max-width: 999px) {
+  .drink-list {
+    grid-template-columns: repeat(2, 50%);
+  }
+}
+@media (max-width: 699px) {
+  .drink-list {
+    grid-template-columns: auto;
+  }
+}

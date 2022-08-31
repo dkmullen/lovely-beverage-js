@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="css/styles.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>A Lovely Beverage</title>
+  </head>
+  <body>
+    <header>
+      <a href="#">
+        <img src="images/logo-combined.png" alt="beverage logo" class="logo" />
+      </a>
+    </header>
+
+    <div class="featured-drink">
+      <a href="details.html">
+        <h1 id="beverage-name"></h1>
+        <p class="tagline">A drink chosen (at random) especially for you</p>
+        <div>
+          <img id="beverage-photo" src="" alt="" />
+        </div>
+        <div class="subtle">Click for details</div>
+      </a>
+    </div>
+    <footer>
+      <p>Find drinks that start with...</p>
+      <div id="letter-bar">
+        <!-- {% for letter in alphabet %} -->
+        <!-- <a href="" aria-label="">
+          <div class="letter-square">
+            <span class="letter">A</span>
+          </div>
+        </a> -->
+      </div>
+      <div class="button-row">
+        <button id="random-button">Random Drink</button>
+      </div>
+      <div class="credits">
+        A Lovely Beverage is powered by
+        <a href="https://www.thecocktaildb.com" target="_blank">
+          The Cocktail DB API</a
+        >. Free logo created at
+        <a href="https://logomakr.com/" target="_blank"> LogoMakr.com</a>.
+      </div>
+    </footer>
+    <script src="js/api.js"></script>
+    <script>
+      mixMeARandomDrink();
+    </script>
+  </body>
+</html>
