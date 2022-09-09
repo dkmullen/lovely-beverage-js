@@ -134,6 +134,8 @@ button {
 }
 .credits {
   font-size: small;
+  position: relative;
+  top: 5px;
 }
 .credits a {
   color: var(--primary);
