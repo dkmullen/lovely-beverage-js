@@ -71,7 +71,34 @@ function makeButtons() {
 }
 
 function check(l) {
+  window.location.href = `./list.html?letter=${l}`;
+}
+
+function getList() {
+  let l = window.location.search.split('=')[1];
   console.log(l);
+  getMeADrink(byLetter, l).then((drinkList) => {
+    console.log(drinkList.drinks);
+    let drinkStr = '';
+    drinkList.drinks.forEach((drink) => {
+      drinkStr += `
+      <div class="drink-list-item">
+          <div>
+              <img src="${drink.strDrinkThumb}" alt="Picture of ${drink.name}">
+          </div>
+          <div class="drink-list-label">
+              <div class="drink-list-name">
+                      ${drink['strDrink']}
+              </div>
+              <div class="drink-list-ingredients">Ingredients: ${drink.ingredients_str}</div>
+          </div>
+      </div>
+      `;
+    });
+    console.log(drinkStr);
+
+    document.querySelector('#drink-list').innerHTML += drinkStr;
+  });
 }
 
 window.onload = makeButtons();
