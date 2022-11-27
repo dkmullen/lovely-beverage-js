@@ -4,6 +4,7 @@ const byLetter = 'search.php?f='; // plus a letter
 const byIngredient = 'filter.php?i='; // plus an ingredient
 const drinkDetails = 'lookup.php?i='; // plus the id number of a drink
 
+// Called by other functions - the main api call to get one or more drinks
 function getMeADrink(qStr, id = '') {
   let searchStr = id ? `${baseUrl}${qStr}${id}` : `${baseUrl}${qStr}`;
   return fetch(searchStr)
@@ -21,8 +22,8 @@ if (randomButton) {
   randomButton.addEventListener('click', mixMeARandomDrink);
 }
 
-function mixMeARandomDrink(e) {
-  // e.preventDefault();
+// Called on index.html for the main display
+function mixMeARandomDrink() {
   getMeADrink(random).then((data) => {
     drinkData = data.drinks[0];
     document.querySelector('#beverage-name').innerHTML = drinkData.strDrink;
@@ -32,6 +33,7 @@ function mixMeARandomDrink(e) {
   });
 }
 
+// Makes the letter buttons for display in footer
 function makeButtons() {
   const letters = [
     'a',
@@ -62,7 +64,7 @@ function makeButtons() {
   let letterStr = '';
   letters.forEach((l) => {
     letterStr += `
-    <div class="letter-square" onclick="check('${l}')">
+    <div class="letter-square" onclick="navTo('list', '${l}')">
       <span class="letter" aria-label="button for ${l}">${l}</span>
     </div>
     `;
@@ -70,19 +72,29 @@ function makeButtons() {
   document.querySelector('#letter-bar').innerHTML = letterStr;
 }
 
-function check(l) {
-  window.location.href = `./list.html?letter=${l}`;
+function parseList(drink, type = 'strIngredient') {
+  let list = [];
+  for (let i in drink) {
+    if (i.includes(type) && drink[i]) {
+      list.push(drink[i]);
+    }
+  }
+  return list;
 }
 
+function navTo(page, param) {
+  window.location.href = `./${page}.html?item=${param}`;
+}
+
+// Fill in the 'list by letter' page
 function getList() {
   let l = window.location.search.split('=')[1];
-  console.log(l);
   getMeADrink(byLetter, l).then((drinkList) => {
-    console.log(drinkList.drinks);
     let drinkStr = '';
     drinkList.drinks.forEach((drink) => {
+      let ingredients = parseList(drink);
       drinkStr += `
-      <div class="drink-list-item">
+      <div class="drink-list-item" onclick="navTo('details', ${drink.idDrink})">
           <div>
               <img src="${drink.strDrinkThumb}" alt="Picture of ${drink.name}">
           </div>
@@ -90,14 +102,49 @@ function getList() {
               <div class="drink-list-name">
                       ${drink['strDrink']}
               </div>
-              <div class="drink-list-ingredients">Ingredients: ${drink.ingredients_str}</div>
+              <div class="drink-list-ingredients">Ingredients: ${ingredients.join(
+                ', '
+              )}</div>
           </div>
       </div>
       `;
     });
-    console.log(drinkStr);
 
     document.querySelector('#drink-list').innerHTML += drinkStr;
+  });
+}
+
+// Fill in the drink details page
+function getDetails() {
+  let id = window.location.search.split('=')[1];
+  getMeADrink(drinkDetails, id).then((d) => {
+    let drink = d.drinks[0];
+    let ingredientsList = '';
+    let ingredients = parseList(drink);
+    let amounts = parseList(drink, 'strMeasure');
+    // List ingredients and (if any) anmounts together
+    for (let i of ingredients) {
+      let amount = amounts[ingredients.indexOf(i)];
+      ingredientsList += `
+        <li>${i} ${amount ? amount : ''}</li>
+      `;
+    }
+    drinkStr = `
+      <div class="details-drink">
+        <h1>${drink['strDrink']}</h1>
+        <div>
+            <img src="${drink.strDrinkThumb}" alt="Picture of ${drink.strDrink}">
+        </div>
+        <div class="info">
+            <ul>
+                ${ingredientsList}
+            </ul>
+        <div class="instructions">${drink.strInstructions}</div>
+        <div>Serve in: ${drink.strGlass}</div>
+        </div>
+    </div>
+    `;
+    document.querySelector('#details-wrapper').innerHTML += drinkStr;
   });
 }
 
