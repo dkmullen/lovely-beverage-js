@@ -30,6 +30,8 @@ function mixMeARandomDrink() {
     let photo = document.querySelector('#beverage-photo');
     photo.src = drinkData.strDrinkThumb;
     photo.alt = `A photo of the drink ${drinkData.strDrink}`;
+    featured = document.querySelector('.f-link');
+    featured.href = `details.html?item=${drinkData.idDrink}`;
   });
 }
 
